@@ -1,5 +1,14 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
+const defaultRouter = require('./routers/default.router');
+const productRouter = require('./routers/products.router');
+
+app.use(bodyParser.json());
+
+app.use('/', defaultRouter);
+app.use('/api', productRouter);
 
 
 app.get('/', function(request, response){
