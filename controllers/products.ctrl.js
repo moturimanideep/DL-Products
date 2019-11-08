@@ -55,6 +55,42 @@ const productCtrl = {
             res.send('Inserted successfully');
             res.status(200);
         }
+    },
+    update: function(req, res){
+        let id = req.body.id;
+        let isPresent = false;
+        for(let i = 0; i < products.length; i++){
+            if(products[i].id === id){
+                products[i].name = req.body.name;
+                products[i].price = req.body.price;
+                products[i].inStock = req.body.inStock;
+                isPresent = true;
+            }
+        }
+        if(isPresent){
+            res.send('Updated successfully');
+            res.status(200);
+        }else{
+            res.send('Failed in updating');
+            res.status(200);
+        }
+    },
+    delete: function(req, res){
+        let id = +req.query.id;
+        let isDeleted = false;
+        for(let i= 0; i < products.length; i++){
+            if(products[i].id === id) {
+                products.splice(i, 1);
+                isDeleted = true;
+            }
+        }
+        if(isDeleted){
+            res.send('Deleted successfully');
+            res.status(200);
+        }else{
+            res.send('Failed in deleting');
+            res.status(200);
+        }
     }
 }
 
