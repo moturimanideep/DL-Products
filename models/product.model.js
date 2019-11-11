@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const productModel = mongoose.model('product', {
-    name: String,
+    name: {type: String, unique: true},
     price: String,
     inStock: Boolean,
     lastUpdated: {type: Date, default: Date.now()}

@@ -8,12 +8,14 @@ const router = express.Router();
 // router.delete('/deleteProduct', productCtrl.delete);
 
 
-const dbProductCtrl = require('../controllers/db-product.ctrl');
+// const dbProductCtrl = require('../controllers/db-product.ctrl');
+const PromisesProductCtrl = require('../controllers/promises-product.ctrl');
 
-router.get('/products', dbProductCtrl.getProducts);
-router.get('/product/:id', dbProductCtrl.getProductByID);
-router.post('/addProduct', dbProductCtrl.addProduct);
-router.put('/updateProduct', dbProductCtrl.update);
-router.delete('/deleteProduct', dbProductCtrl.delete);
+router.get('/products', PromisesProductCtrl.getProducts);
+router.get('/products/:pageIndex/:pageSize', PromisesProductCtrl.getProductsByIndex);
+router.get('/product/:id', PromisesProductCtrl.getProductByID);
+router.post('/addProduct', PromisesProductCtrl.addProduct);
+router.put('/updateProduct', PromisesProductCtrl.update);
+router.delete('/deleteProduct', PromisesProductCtrl.delete);
 
 module.exports = router;
