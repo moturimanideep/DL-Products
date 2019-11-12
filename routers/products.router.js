@@ -9,13 +9,14 @@ const router = express.Router();
 
 
 // const dbProductCtrl = require('../controllers/db-product.ctrl');
-const PromisesProductCtrl = require('../controllers/promises-product.ctrl');
+// const PromisesProductCtrl = require('../controllers/promises-product.ctrl');
+const AsyncAwaitProductCtrl = require('../controllers/asyncawait-product.ctrl');
 
-router.get('/products', PromisesProductCtrl.getProducts);
-router.get('/products/:pageIndex/:pageSize', PromisesProductCtrl.getProductsByIndex);
-router.get('/product/:id', PromisesProductCtrl.getProductByID);
-router.post('/addProduct', PromisesProductCtrl.addProduct);
-router.put('/updateProduct', PromisesProductCtrl.update);
-router.delete('/deleteProduct', PromisesProductCtrl.delete);
+router.get('/products', AsyncAwaitProductCtrl.getProducts);
+router.get('/products/:pageIndex/:pageSize', AsyncAwaitProductCtrl.getProductsByIndex);
+router.get('/product/:id', AsyncAwaitProductCtrl.getProductByID);
+router.post('/addProduct', AsyncAwaitProductCtrl.addProduct);
+router.put('/updateProduct', AsyncAwaitProductCtrl.update);
+router.delete('/deleteProduct', AsyncAwaitProductCtrl.delete);
 
 module.exports = router;

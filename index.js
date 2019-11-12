@@ -65,8 +65,12 @@ app.use('/api', productRouter);
 // })
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/dl-products', () => {
-    console.log('DB Connected successfully');
+mongoose.connect('mongodb://localhost:27017/dl-products', (error, response) => {
+    if(response){
+        console.log('DB Connected successfully');
+    }else{
+        console.log('Failed in connecting to server.');
+    }
 })
 
 
