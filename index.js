@@ -3,11 +3,14 @@ var app = express();
 var bodyParser = require('body-parser');
 
 const defaultRouter = require('./routers/default.router');
+const userRouter = require('./routers/users.router');
 const productRouter = require('./routers/products.router');
 
 app.use(bodyParser.json());
 
 app.use('/', defaultRouter);
+app.use('/api', userRouter);
+
 app.use('/api', productRouter);
 
 
@@ -69,7 +72,7 @@ mongoose.connect('mongodb://localhost:27017/dl-products', (error, response) => {
     if(response){
         console.log('DB Connected successfully');
     }else{
-        console.log('Failed in connecting to server.');
+        console.log('Failed in connecting to db.');
     }
 })
 
