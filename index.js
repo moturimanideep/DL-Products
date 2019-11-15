@@ -5,12 +5,14 @@ var bodyParser = require('body-parser');
 const defaultRouter = require('./routers/default.router');
 const userRouter = require('./routers/users.router');
 const productRouter = require('./routers/products.router');
+const authorization = require('./middlewares/basicAuth');
 
 app.use(bodyParser.json());
 
 app.use('/', defaultRouter);
 app.use('/api', userRouter);
-
+// app.use(basicAuthorization.basicAuth);
+// app.use(authorization.jwtAuth);
 app.use('/api', productRouter);
 
 

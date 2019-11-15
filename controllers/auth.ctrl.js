@@ -1,5 +1,7 @@
 const authSvc = require('../services/auth.svc');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 const authCtrl = {
     register: async function(request, response){
         try{
@@ -21,8 +23,11 @@ const authCtrl = {
         try{
             let user = await authSvc.getUser(req.body.username);
             let credCheck = bcrypt.compareSync(req.body.password, user.password);
+            let token = jwt.sign({
+                username: req.body.username
+              }, config.JWTSecret, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
             if(credCheck){
-                res.status(200).json({status: 1, data: user});
+                res.status(200).json({status: 1, data: {username: req.body.username, token: token}});
             }else{
                 res.status(200).send({status: 0, data: 'Invalid username/password'});
             }
