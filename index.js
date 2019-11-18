@@ -7,67 +7,24 @@ const userRouter = require('./routers/users.router');
 const productRouter = require('./routers/products.router');
 const authorization = require('./middlewares/basicAuth');
 
+app.use(express.static('uploads/'));
 app.use(bodyParser.json());
 
 app.use('/', defaultRouter);
 app.use('/api', userRouter);
 // app.use(basicAuthorization.basicAuth);
-// app.use(authorization.jwtAuth);
+app.use(authorization.jwtAuth);
 app.use('/api', productRouter);
 
 
-// app.get('/', function(request, response){
-//     response.send('Welcome to DL-Products');
-// })
+// app.set('view engine', 'hbs');
 
-// app.get('/products', function(request, response){
-//     var products = [
-//         {
-//             id: 1,
-//             name: 'Samsung S9 Plus',
-//             price: '39999',
-//             inStock: true
-//         },
-//         {
-//             id: 2,
-//             name: 'One Plus 7',
-//             price: '39999',
-//             inStock: true
-//         },
-//         {
-//             id: 3,
-//             name: 'One Plus 6',
-//             price: '29999',
-//             inStock: false
-//         },
-//     ];
-//     response.send(products);
-// })
-
-// app.get('/books', function(req, res){
-//     let books = [
-//         {
-//             id: 1,
-//             name: 'Java Script: The Goodparts',
-//             price: '425',
-//             inStock: true
-//         },
-//         {
-//             id: 2,
-//             name: 'Mastering HTML, CSS & Javascript Web Publishing',
-//             price: '435',
-//             inStock: true
-//         },
-//         {
-//             id: 3,
-//             name: 'Get Programming with JavaScript',
-//             price: '607',
-//             inStock: false
-//         },
-//     ];
-//     res.json(books);
-//     res.status(400);
-// })
+// app.engine( 'hbs', hbs( {
+//   extname: 'hbs',
+//   defaultView: 'default',
+//   layoutsDir: __dirname + '/views/',
+//   partialsDir: __dirname + '/views/partials/'
+// }));
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dl-products', (error, response) => {
