@@ -2,14 +2,17 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+const PORT = process.env.PORT || 3000;
 const defaultRouter = require('./routers/default.router');
 const userRouter = require('./routers/users.router');
 const productRouter = require('./routers/products.router');
 const authorization = require('./middlewares/basicAuth');
+const defaultCtrl = require('./controllers/default.ctrl');
 
 app.use(express.static('uploads/'));
 app.use(bodyParser.json());
 
+app.get('/', defaultCtrl.defaultCheck);
 app.use('/', defaultRouter);
 app.use('/api', userRouter);
 // app.use(basicAuthorization.basicAuth);
@@ -44,6 +47,6 @@ mongoose.connect('mongodb://admin:admin123@ds053429.mlab.com:53429/dl-products',
 })
 
 
-app.listen(3000, function(){
+app.listen(PORT, function(){
     console.log('Server runing on 3000 port');
 })
