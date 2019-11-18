@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use('/', defaultRouter);
 app.use('/api', userRouter);
 // app.use(basicAuthorization.basicAuth);
-app.use(authorization.jwtAuth);
+// app.use(authorization.jwtAuth);
 app.use('/api', productRouter);
 
 
@@ -27,7 +27,15 @@ app.use('/api', productRouter);
 // }));
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/dl-products', (error, response) => {
+// mongoose.connect('mongodb://localhost:27017/dl-products', (error, response) => {
+//     if(response){
+//         console.log('DB Connected successfully');
+//     }else{
+//         console.log('Failed in connecting to db.');
+//     }
+// })
+
+mongoose.connect('mongodb://admin:admin123@ds053429.mlab.com:53429/dl-products', (error, response) => {
     if(response){
         console.log('DB Connected successfully');
     }else{
