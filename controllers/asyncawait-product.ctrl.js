@@ -25,7 +25,12 @@ const dbProductCtrl = {
             };
             let productsToSkip = Math.ceil(pageIndex * pageSize);
             let response = await productsvc.getProductsUsingLimit(productsToSkip, pageSize);
-            res.json({ metadata: metadata, data: response });
+            let jsonResponse = response;
+            for(let i = 0; i < jsonResponse.length; i++){
+                if(jsonResponse[i].image) jsonResponse[i].image = `${req.protocol}://${req.get('host')}/${jsonResponse[i].image}`;
+                else jsonResponse.image = '';
+            }
+            res.json({ metadata: metadata, data: jsonResponse });
             res.status(200);
         } catch (error) {
             res.send(error);
@@ -34,9 +39,14 @@ const dbProductCtrl = {
     },
     getProductByID: async function (req, res) {
         try {
+            let jsonProduct;
             let id = req.params.id;
             let product = await productsvc.getProductByID(id);
-            res.send(product);
+            jsonProduct = product.toJSON();
+            jsonProduct.image = `${req.protocol}://${req.get('host')}/${product.image}`;
+            console.log(req.get('host'));
+            // jsonProduct.image = req.protocol
+            res.send(jsonProduct);
             res.status(200);
         }
         catch(error){

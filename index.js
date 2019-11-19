@@ -38,7 +38,7 @@ const mongoose = require('mongoose');
 //     }
 // })
 
-mongoose.connect('mongodb://admin:admin123@ds053429.mlab.com:53429/dl-products', (error, response) => {
+mongoose.connect('mongodb://admin:admin123@ds053429.mlab.com:53429/dl-products', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error, response) => {
     if(response){
         console.log('DB Connected successfully');
     }else{

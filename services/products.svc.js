@@ -5,7 +5,7 @@ class ProductService {
         return productModel.find({}).exec();
     }
     getProductsCount(){
-        return productModel.count().exec();
+        return productModel.countDocuments().exec();
     }
     getProductsUsingLimit(productsToSkip, pageSize){
         return productModel.find()
