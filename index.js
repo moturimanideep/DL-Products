@@ -8,6 +8,7 @@ const userRouter = require('./routers/users.router');
 const productRouter = require('./routers/products.router');
 const authorization = require('./middlewares/basicAuth');
 const defaultCtrl = require('./controllers/default.ctrl');
+const reviewRouter = require('./routers/reviews.router');
 
 app.use(express.static('uploads/'));
 app.use(bodyParser.json());
@@ -17,6 +18,7 @@ app.use('/', defaultRouter);
 app.use('/api', userRouter);
 // app.use(basicAuthorization.basicAuth);
 // app.use(authorization.jwtAuth);
+app.use('/api/reviews', reviewRouter);
 app.use('/api', productRouter);
 
 
