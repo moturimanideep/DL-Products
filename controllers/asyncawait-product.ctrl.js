@@ -1,5 +1,6 @@
 const productModel = require('../models/product.model');
 const productsvc = require('../services/products.svc');
+const reviewsSvc = require('../services/reviews.svc');
 const dbProductCtrl = {
     getProducts: async function (req, res) {
         try {
@@ -44,8 +45,8 @@ const dbProductCtrl = {
             let product = await productsvc.getProductByID(id);
             jsonProduct = product.toJSON();
             jsonProduct.image = `${req.protocol}://${req.get('host')}/${product.image}`;
-            console.log(req.get('host'));
-            // jsonProduct.image = req.protocol
+            let reviews = reviewsSvc.getReviews(id);
+            jsonProduct.reviews = reviews;
             res.send(jsonProduct);
             res.status(200);
         }
