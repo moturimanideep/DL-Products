@@ -14,7 +14,7 @@ class ProductService {
         .exec()
     }
     getProductByID(id){
-        return productModel.findById(id)
+        return productModel.findById(id, {__v: 0})
         .exec();
     }
     getProductByParameter(name){

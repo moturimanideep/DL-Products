@@ -31,6 +31,12 @@ const dbProductCtrl = {
                 if(jsonResponse[i].image) jsonResponse[i].image = `${req.protocol}://${req.get('host')}/${jsonResponse[i].image}`;
                 else jsonResponse.image = '';
             }
+            for(let i = 0; i < jsonResponse.length; i++){
+                let reviews = await reviewsSvc.getReviews(jsonResponse[i]._id);
+                let updatedResponse = jsonResponse[i].toJSON();
+                updatedResponse.reviews = reviews;   
+                jsonResponse[i] = updatedResponse;
+            }
             res.json({ metadata: metadata, data: jsonResponse });
             res.status(200);
         } catch (error) {
@@ -45,7 +51,7 @@ const dbProductCtrl = {
             let product = await productsvc.getProductByID(id);
             jsonProduct = product.toJSON();
             jsonProduct.image = `${req.protocol}://${req.get('host')}/${product.image}`;
-            let reviews = reviewsSvc.getReviews(id);
+            let reviews = await reviewsSvc.getReviews(id);
             jsonProduct.reviews = reviews;
             res.send(jsonProduct);
             res.status(200);

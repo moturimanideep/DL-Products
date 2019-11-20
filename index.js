@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+const trueLog = require('true-log');
+const fs = require('fs');
+const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const defaultRouter = require('./routers/default.router');
@@ -40,6 +43,13 @@ const mongoose = require('mongoose');
 //     }
 // })
 
+const ws = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: 'a' });
+app.use(trueLog({level:'tiny',stream:ws}));
+
+var logger = require('logger-request');
+app.use(logger({
+    filename: 'foo.log',
+  }));
 mongoose.connect('mongodb://admin:admin123@ds053429.mlab.com:53429/dl-products', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error, response) => {
     if(response){
         console.log('DB Connected successfully');
