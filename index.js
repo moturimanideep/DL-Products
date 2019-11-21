@@ -13,6 +13,9 @@ const authorization = require('./middlewares/basicAuth');
 const defaultCtrl = require('./controllers/default.ctrl');
 const reviewRouter = require('./routers/reviews.router');
 
+const ws = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: 'a' });
+app.use(trueLog({level:'full',stream:ws}));
+
 app.use(express.static('uploads/'));
 app.use(bodyParser.json());
 
@@ -24,7 +27,13 @@ app.use('/api', userRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api', productRouter);
 
-
+// fs.readFile('log.txt', function(err, buf) {
+//     const a = buf.toString();
+//     const b = a.split('}');
+//     for(let i = 0; i < b.length; i++){
+//         console.log(b[i]);
+//     }
+// })
 // app.set('view engine', 'hbs');
 
 // app.engine( 'hbs', hbs( {
@@ -42,14 +51,6 @@ const mongoose = require('mongoose');
 //         console.log('Failed in connecting to db.');
 //     }
 // })
-
-const ws = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: 'a' });
-app.use(trueLog({level:'tiny',stream:ws}));
-
-var logger = require('logger-request');
-app.use(logger({
-    filename: 'foo.log',
-  }));
 mongoose.connect('mongodb://admin:admin123@ds053429.mlab.com:53429/dl-products', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error, response) => {
     if(response){
         console.log('DB Connected successfully');

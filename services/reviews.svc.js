@@ -7,6 +7,15 @@ const ReviewService = {
     },
     getReviews(id){
         return reviewModal.find({productID: id}, {productID: 0, _id: 0, __v:0, lastUpdated: 0}).exec();
+    },
+    getAvgRating(id){
+        return reviewModal.aggregate(
+            [
+                {$match: {productID: id}},
+                {$group: {_id: null, avgRating: {$avg: '$rating'}}},
+                {$project: {_id: 0}}
+            ]
+        )
     }
 }
 

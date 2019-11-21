@@ -1,0 +1,9 @@
+
+{"ip":"::1","url":"/api/products/0/5","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/20/2019, 12:17:44 PM"}
+{"ip":"::1","url":"/api/product/5dd23ccb8c16290b246e2d85","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/20/2019, 12:17:48 PM"}
+{"ip":"::1","url":"/api/product/5dd23ccb8c16290b246e2d85","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/20/2019, 12:17:50 PM"}
+{"ip":"::1","url":"/api/product/5dd23ccb8c16290b246e2d85","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/20/2019, 12:19:20 PM","host":"localhost:3000","responseTime":"473ms","status":200}
+{"ip":"::1","url":"/api/products/0/5","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/20/2019, 12:21:33 PM","host":"localhost:3000","responseTime":"1363ms","status":200}
+{"ip":"::1","url":"/api/login","method":"POST","userAgent":"PostmanRuntime/7.19.0","date":"11/20/2019, 12:22:02 PM","host":"localhost:3000","responseTime":"359ms","status":500}
+{"ip":"::1","url":"/api/product/5dd23ccb8c16290b246e2d85","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/21/2019, 11:58:09 AM","host":"localhost:3000","responseTime":"721ms","status":200}
+{"ip":"::1","url":"/api/product/5dd23ccb8c16290b246e2d85","method":"GET","userAgent":"PostmanRuntime/7.19.0","date":"11/21/2019, 11:58:44 AM","host":"localhost:3000","responseTime":"748ms","status":200}

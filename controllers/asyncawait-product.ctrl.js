@@ -52,6 +52,8 @@ const dbProductCtrl = {
             jsonProduct = product.toJSON();
             jsonProduct.image = `${req.protocol}://${req.get('host')}/${product.image}`;
             let reviews = await reviewsSvc.getReviews(id);
+            let avgRating = await reviewsSvc.getAvgRating(id);
+            if(avgRating) jsonProduct.avgRating = avgRating[0].avgRating;
             jsonProduct.reviews = reviews;
             res.send(jsonProduct);
             res.status(200);
