@@ -12,6 +12,22 @@ const productRouter = require('./routers/products.router');
 const authorization = require('./middlewares/basicAuth');
 const defaultCtrl = require('./controllers/default.ctrl');
 const reviewRouter = require('./routers/reviews.router');
+var cors = require('cors');
+var whitelist = [
+    'http://localhost:4200'
+];
+
+var corsOptions = {
+    credentials: true,
+    origin: function(origin, callback) {
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: 'accept, content-type'
+};
+
+app.use(cors(corsOptions));
 
 const ws = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: 'a' });
 app.use(trueLog({level:'full',stream:ws}));
